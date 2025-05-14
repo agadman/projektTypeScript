@@ -1,1 +1,21 @@
-<p>courses works!</p>
+<h2>Kurser</h2>
+
+@if(error()) {
+    <div class="error">
+        <p>{{ error() }}</p>
+    </div>
+}
+
+@for(course of courses(); track $index) {
+    <article>
+        <h3>{{ course.courseName }}</h3>
+        <p>{{ course.courseCode }}</p>
+        <p>{{ course.subjectCode }}</p>
+        <p>{{ course.level }}</p>
+        <p>{{ course.progression }}</p>
+        <p>{{ course.points }}</p>
+        <p>{{ course.institutionCode }}</p>
+        <p>{{ course.subject }}</p>
+        <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
+    </article>  
+}

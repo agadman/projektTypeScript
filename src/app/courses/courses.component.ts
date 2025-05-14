@@ -24,7 +24,7 @@ export class CoursesComponent {
       this.courses.set(response);
       console.table(this.courses());
     } catch (error) {
-      console.error(error);
+      //console.error(error);
       this.error.set("Kunde inte ladda kurser - försök igen senare.");
     }
   }
