@@ -17,4 +17,16 @@ export class ScheduleComponent {
     this.schedule.set(this.scheduleService.getSchedule());
   }
 
+  removeCourse(courseCode: string) {
+    this.scheduleService.removeCourse(courseCode);
+    this.schedule.set(this.scheduleService.getSchedule());
+    console.log(`Kursen ${courseCode} har tagits bort från schemat!`);
+  }
+
+  clearSchedule() {
+    this.scheduleService.clearSchedule();
+    this.schedule.set([]);
+    console.log(`Schemat har rensats!`);
+  }
+
 }

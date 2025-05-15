@@ -14,6 +14,8 @@
         <p>{{ course.institutionCode }}</p>
         <p>{{ course.subject }}</p>
         <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
+        <button (click)="removeCourse(course.courseCode)">Ta bort</button>
     </article>  
 }
+<button (click)="clearSchedule()">Rensa schema</button>
 }

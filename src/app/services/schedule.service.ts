@@ -18,4 +18,14 @@ export class ScheduleService {
     schedule.push(course);
     localStorage.setItem(this.StorageKey, JSON.stringify(schedule));
   }
+
+  removeCourse(courseCode: string): void {
+    const schedule = this.getSchedule();
+    const updatedSchedule = schedule.filter(course => course.courseCode !== courseCode);
+    localStorage.setItem(this.StorageKey, JSON.stringify(updatedSchedule)); 
+  }
+
+  clearSchedule(): void {
+    localStorage.removeItem(this.StorageKey);
+  }
 }
