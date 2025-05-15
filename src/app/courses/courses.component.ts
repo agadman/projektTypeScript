@@ -1,10 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
+import { ScheduleService } from '../services/schedule.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-courses',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
@@ -13,6 +15,7 @@ export class CoursesComponent {
   error = signal<string | null>(null);
 
   coursesService = inject(CoursesService);
+  scheduleService = inject(ScheduleService)
 
   ngOnInit() {
     this.loadCourses();
@@ -28,4 +31,10 @@ export class CoursesComponent {
       this.error.set("Kunde inte ladda kurser - försök igen senare.");
     }
   }
+
+  addToSchedule(course: Course) {
+    this.scheduleService.addCourse(course);
+    console.log(`Kursen ${course.courseCode} har lagts till i schemat!`);
+  }
+
 }

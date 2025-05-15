@@ -1,1 +1,19 @@
-<p>schedule works!</p>
+<h2>Mitt Ramschema</h2>
+
+@if(schedule().length === 0) {
+    <p>Du har inte lagt till några kurser än.</p>
+} @else {
+    @for(course of schedule(); track $index) {
+    <article>
+        <h3>{{ course.courseName }}</h3>
+        <p>{{ course.courseCode }}</p>
+        <p>{{ course.subjectCode }}</p>
+        <p>{{ course.level }}</p>
+        <p>{{ course.progression }}</p>
+        <p>{{ course.points }}</p>
+        <p>{{ course.institutionCode }}</p>
+        <p>{{ course.subject }}</p>
+        <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
+    </article>  
+}
+}
