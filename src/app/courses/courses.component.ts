@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
 import { ScheduleService } from '../services/schedule.service';
@@ -13,9 +13,48 @@ import { CommonModule } from '@angular/common';
 export class CoursesComponent {
   courses = signal<Course[]>([]); 
   error = signal<string | null>(null);
+  filterValue = signal<string>('');
 
   coursesService = inject(CoursesService);
   scheduleService = inject(ScheduleService)
+
+  sortField = signal<keyof Course | null>(null);
+  sortDirection = signal<boolean>(true);
+
+  sortedCourses = computed(() => {
+    const list = [...this.courses()];
+    const field = this.sortField();
+    const asc = this.sortDirection();
+
+    if (!field) return list;
+
+    return list.sort((a, b) => {
+      const aVal = a[field];
+      const bVal = b[field];
+
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return asc
+          ? aVal.localeCompare(bVal)
+          : bVal.localeCompare(aVal);
+      }
+
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return asc ? aVal - bVal : bVal - aVal;
+      }
+
+      return 0;
+    });
+  });
+
+  // Metod för att hantera när en th klickas på (kod, namn eller progression)
+  setSort(field: keyof Course) {
+    if (this.sortField() === field) {
+      this.sortDirection.set(!this.sortDirection()); // Byt riktning (om samma fält klickas)
+    } else {
+      this.sortField.set(field); // Nytt th klickas på
+      this.sortDirection.set(true); // Börjar med stigande
+    }
+  }
 
   ngOnInit() {
     this.loadCourses();
