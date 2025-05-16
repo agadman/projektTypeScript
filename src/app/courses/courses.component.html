@@ -6,6 +6,9 @@
     </div>
 }
 
+<div>
+    <input type="text" [(ngModel)]="filterValue" placeholder="Sök kursnamn eller kod" />
+</div>
 <table>
   <thead>
     <tr>
@@ -22,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    @for(course of sortedCourses(); track $index) {
+    @for(course of filteredAndSortedCourses(); track $index) {
       <tr>
         <td>{{ course.courseName }}</td>
         <td>{{ course.courseCode }}</td>

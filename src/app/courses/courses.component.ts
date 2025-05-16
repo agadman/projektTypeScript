@@ -3,10 +3,11 @@ import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
 import { ScheduleService } from '../services/schedule.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-courses',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
@@ -21,32 +22,41 @@ export class CoursesComponent {
   sortField = signal<keyof Course | null>(null);
   sortDirection = signal<boolean>(true);
 
-  sortedCourses = computed(() => {
-    const list = [...this.courses()];
-    const field = this.sortField();
-    const asc = this.sortDirection();
+  filteredAndSortedCourses = computed(() => {
+  const search = this.filterValue().toLowerCase();
+  const list = [...this.courses()];
 
-    if (!field) return list;
+  // Filtrering
+  const filtered = list.filter(course =>
+    course.courseName.toLowerCase().includes(search) ||
+    course.courseCode.toLowerCase().includes(search)
+  );
 
-    return list.sort((a, b) => {
-      const aVal = a[field];
-      const bVal = b[field];
+  // Sortering
+  const field = this.sortField();
+  const asc = this.sortDirection();
 
-      if (typeof aVal === 'string' && typeof bVal === 'string') {
-        return asc
-          ? aVal.localeCompare(bVal)
-          : bVal.localeCompare(aVal);
-      }
+  if (!field) return filtered;
 
-      if (typeof aVal === 'number' && typeof bVal === 'number') {
-        return asc ? aVal - bVal : bVal - aVal;
-      }
+  return filtered.sort((a, b) => {
+    const aVal = a[field];
+    const bVal = b[field];
 
-      return 0;
-    });
+    if (typeof aVal === 'string' && typeof bVal === 'string') {
+      return asc
+        ? aVal.localeCompare(bVal)
+        : bVal.localeCompare(aVal);
+    }
+
+    if (typeof aVal === 'number' && typeof bVal === 'number') {
+      return asc ? aVal - bVal : bVal - aVal;
+    }
+
+    return 0;
   });
+});
 
-  // Metod för att hantera när en th klickas på (kod, namn eller progression)
+  // Metod för att hantera när en th klickas på (kod, namn, poäng eller ämne)
   setSort(field: keyof Course) {
     if (this.sortField() === field) {
       this.sortDirection.set(!this.sortDirection()); // Byt riktning (om samma fält klickas)
