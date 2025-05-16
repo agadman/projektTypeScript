@@ -17,6 +17,10 @@
         <p>{{ course.institutionCode }}</p>
         <p>{{ course.subject }}</p>
         <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
-        <button (click)="addToSchedule(course)">Lägg till</button>
+        <button 
+            (click)="addToSchedule(course)"
+            [disabled]="isInSchedule(course.courseCode)">
+            {{ isInSchedule(course.courseCode) ? 'Tillagd' : 'Lägg till' }}
+        </button>
     </article>  
 }

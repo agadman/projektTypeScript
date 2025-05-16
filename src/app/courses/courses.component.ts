@@ -35,6 +35,11 @@ export class CoursesComponent {
   addToSchedule(course: Course) {
     this.scheduleService.addCourse(course);
     console.log(`Kursen ${course.courseCode} har lagts till i schemat!`);
+    this.courses.set([...this.courses()]);
   }
+
+  isInSchedule(courseCode: string): boolean {
+  return this.scheduleService.getSchedule().some(c => c.courseCode === courseCode);
+}
 
 }
