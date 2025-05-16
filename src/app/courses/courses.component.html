@@ -9,6 +9,14 @@
 <div>
     <input type="text" [(ngModel)]="filterValue" placeholder="Sök kursnamn eller kod" />
 </div>
+<div>
+  <label for="subjectSelect">Filtrera på ämne:</label>
+  <select id="subjectSelect" [value]="selectedSubject()" (change)="selectedSubject.set($any($event.target).value)">
+    @for(subject of subjects(); track $index) {
+      <option [value]="subject">{{ subject }}</option>
+    }
+  </select>
+</div>
 <table>
   <thead>
     <tr>

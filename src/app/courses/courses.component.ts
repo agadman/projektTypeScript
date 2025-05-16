@@ -15,6 +15,7 @@ export class CoursesComponent {
   courses = signal<Course[]>([]); 
   error = signal<string | null>(null);
   filterValue = signal<string>('');
+  selectedSubject = signal('Alla');
 
   coursesService = inject(CoursesService);
   scheduleService = inject(ScheduleService)
@@ -24,15 +25,21 @@ export class CoursesComponent {
 
   filteredAndSortedCourses = computed(() => {
   const search = this.filterValue().toLowerCase();
+  const selected = this.selectedSubject();
   const list = [...this.courses()];
 
-  // Filtrering
-  const filtered = list.filter(course =>
+  // 1. Filtrera på sökord
+  let filtered = list.filter(course =>
     course.courseName.toLowerCase().includes(search) ||
     course.courseCode.toLowerCase().includes(search)
   );
 
-  // Sortering
+  // 2. Filtrera på ämne (om inte "Alla" är valt)
+  if (selected !== 'Alla') {
+    filtered = filtered.filter(course => course.subject === selected);
+  }
+
+  // 3. Sortera
   const field = this.sortField();
   const asc = this.sortDirection();
 
@@ -43,9 +50,7 @@ export class CoursesComponent {
     const bVal = b[field];
 
     if (typeof aVal === 'string' && typeof bVal === 'string') {
-      return asc
-        ? aVal.localeCompare(bVal)
-        : bVal.localeCompare(aVal);
+      return asc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
     }
 
     if (typeof aVal === 'number' && typeof bVal === 'number') {
@@ -70,16 +75,25 @@ export class CoursesComponent {
     this.loadCourses();
   }
 
-  async loadCourses() {
-    try {
-      const response = await this.coursesService.loadCourses();
-      this.courses.set(response);
-      console.table(this.courses());
-    } catch (error) {
-      //console.error(error);
-      this.error.set("Kunde inte ladda kurser - försök igen senare.");
-    }
+ subjects = signal<string[]>([]);
+
+async loadCourses() {
+  try {
+    const response = await this.coursesService.loadCourses();
+    this.courses.set(response);
+
+    // Hämta unika ämnen och sortera dem
+    const uniqueSubjects = Array.from(
+      new Set(response.map(c => c.subject))
+    ).sort();
+
+    // Lägg till "Alla" överst
+    this.subjects.set(['Alla', ...uniqueSubjects]);
+  } catch (error) {
+    // console.error(error)
+    this.error.set("Kunde inte ladda kurser - försök igen senare.");
   }
+}
 
   addToSchedule(course: Course) {
     this.scheduleService.addCourse(course);
