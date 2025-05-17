@@ -1,6 +1,6 @@
-/* Global styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+/* Reset och grundinställningar */
 * {
   margin: 0;
   padding: 0;
@@ -9,20 +9,34 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 1rem; /* 16px standard */
   line-height: 1.6;
   background-color: #f9f9f9;
   color: #333;
-  padding: 1rem;
 }
 
-main, app-root {
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout */
+app-root, main {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-h1, h2, h3 {
+h1 {
+  text-align: center;
+  color: #8B1E3F;
+;
+;
+  margin-bottom: 0.5em;
+}
+
+/* Typografi */
+h2, h3 {
   margin-bottom: 0.5em;
   color: #222;
 }
