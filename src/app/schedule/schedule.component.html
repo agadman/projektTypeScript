@@ -1,21 +1,25 @@
-<h2>Mitt Ramschema</h2>
+<h1>Mitt Ramschema</h1>
 
+<main>
 @if(schedule().length === 0) {
-    <p>Du har inte lagt till några kurser än.</p>
+  <p>Du har inte lagt till några kurser än.</p>
 } @else {
+  <div class="schedule-grid">
     @for(course of schedule(); track $index) {
-    <article>
-        <h3>{{ course.courseName }}</h3>
-        <p>{{ course.courseCode }}</p>
+      <article class="course-box">
+        <h2>{{ course.courseName }}</h2>
+        <p>Kurskod: {{ course.courseCode }}</p>
         <p>{{ course.subjectCode }}</p>
         <p>{{ course.level }}</p>
         <p>{{ course.progression }}</p>
-        <p>{{ course.points }}</p>
+        <p>Poäng: {{ course.points }}</p>
         <p>{{ course.institutionCode }}</p>
         <p>{{ course.subject }}</p>
         <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
         <button (click)="removeCourse(course.courseCode)">Ta bort</button>
-    </article>  
+      </article>
+    }
+  </div>
+  <button class="clear-button" (click)="clearSchedule()">Rensa schema</button>
 }
-<button (click)="clearSchedule()">Rensa schema</button>
-}
+</main>

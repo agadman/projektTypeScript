@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-/* Reset och grundinställningar */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +8,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem; /* 16px standard */
+  font-size: 1rem; 
   line-height: 1.6;
   background-color: #f9f9f9;
   color: #333;
@@ -20,23 +19,27 @@ a {
   text-decoration: none;
 }
 
-/* Layout */
 app-root, main {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+main {
   padding: 1rem;
 }
 
 h1 {
   text-align: center;
   color: #8B1E3F;
-;
-;
-  margin-bottom: 0.5em;
+  margin: 1rem 0;
 }
 
-/* Typografi */
-h2, h3 {
+h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+h3 {
   margin-bottom: 0.5em;
   color: #222;
 }

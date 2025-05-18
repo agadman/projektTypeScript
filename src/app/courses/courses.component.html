@@ -1,4 +1,4 @@
-<h2>Kurser</h2>
+<h1>Kurser</h1>
 
 @if(error()) {
     <div class="error">
@@ -36,18 +36,18 @@
   <tbody>
     @for(course of filteredAndSortedCourses(); track $index) {
       <tr>
-        <td>{{ course.courseName }}</td>
-        <td>{{ course.courseCode }}</td>
-        <td>{{ course.subjectCode }}</td>
-        <td>{{ course.level }}</td>
-        <td>{{ course.progression }}</td>
-        <td>{{ course.points }}</td>
-        <td>{{ course.institutionCode }}</td>
-        <td>{{ course.subject }}</td>
-        <td>
+        <td data-label="Namn">{{ course.courseName }}</td>
+        <td data-label="Kurskod">{{ course.courseCode }}</td>
+        <td data-label="Ämneskod">{{ course.subjectCode }}</td>
+        <td data-label="Nivå">{{ course.level }}</td>
+        <td data-label="Progression">{{ course.progression }}</td>
+        <td data-label="Poäng">{{ course.points }}</td>
+        <td data-label="Institutionskod">{{ course.institutionCode }}</td>
+        <td data-label="Ämne">{{ course.subject }}</td>
+        <td data-label="Syllabus">
           <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa</a>
         </td>
-        <td>
+        <td data-label="Ramschema">
           <button 
             (click)="addToSchedule(course)" 
             [disabled]="isInSchedule(course.courseCode)">
