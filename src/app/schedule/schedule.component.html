@@ -9,11 +9,7 @@
       <article class="course-box">
         <h2>{{ course.courseName }}</h2>
         <p>Kurskod: {{ course.courseCode }}</p>
-        <p>{{ course.subjectCode }}</p>
-        <p>{{ course.level }}</p>
-        <p>{{ course.progression }}</p>
         <p>Poäng: {{ course.points }}</p>
-        <p>{{ course.institutionCode }}</p>
         <p>{{ course.subject }}</p>
         <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa kursplan</a>
         <button (click)="removeCourse(course.courseCode)">Ta bort</button>

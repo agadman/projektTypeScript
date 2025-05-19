@@ -23,11 +23,7 @@
     <tr>
       <th (click)="setSort('courseName')">Namn</th>
       <th (click)="setSort('courseCode')">Kurskod</th>
-      <th>Ämneskod</th>
-      <th>Nivå</th>
-      <th>Progression</th>
       <th (click)="setSort('points')">Poäng</th>
-      <th>Institutionskod</th>
       <th (click)="setSort('subject')">Ämne</th>
       <th>Kursplan</th>
       <th>Ramschema</th>
@@ -38,11 +34,7 @@
       <tr>
         <td data-label="Namn">{{ course.courseName }}</td>
         <td data-label="Kurskod">{{ course.courseCode }}</td>
-        <td data-label="Ämneskod">{{ course.subjectCode }}</td>
-        <td data-label="Nivå">{{ course.level }}</td>
-        <td data-label="Progression">{{ course.progression }}</td>
         <td data-label="Poäng">{{ course.points }}</td>
-        <td data-label="Institutionskod">{{ course.institutionCode }}</td>
         <td data-label="Ämne">{{ course.subject }}</td>
         <td data-label="Syllabus">
           <a href="{{ course.syllabus }}" target="_blank" rel="noopener noreferrer">Visa</a>
