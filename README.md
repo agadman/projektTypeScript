@@ -16,6 +16,7 @@ Detta projekt är en webbapplikation byggd med Angular där användaren kan se o
 ## Extra (ej krav för projektet)
 	•	Startsida separat från kurssida och sida för ramschema.
 	•	Navigering och Footer som separata komponenter.
+	•	Installerat pwa
 
 ## Tekniker
 	•	Angular 
