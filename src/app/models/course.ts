@@ -1,3 +1,4 @@
+// Skapar ett interface från en kurs (från json-datan)
 export interface Course {
     courseCode: string;
     subjectCode: string;
