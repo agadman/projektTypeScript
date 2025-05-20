@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Course } from '../models/course';
 import { ScheduleService } from '../services/schedule.service';
 
@@ -12,6 +12,11 @@ import { ScheduleService } from '../services/schedule.service';
 export class ScheduleComponent {
   scheduleService = inject(ScheduleService);
   schedule = signal<Course[]>([]);
+
+  // Signal för att räkna ihop total poäng
+  totalPoints = computed(() => {
+    return this.schedule().reduce((acc, course) => acc + course.points, 0);
+  })
 
   ngOnInit() {
     this.schedule.set(this.scheduleService.getSchedule());

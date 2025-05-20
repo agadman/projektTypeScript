@@ -61,6 +61,11 @@ export class CoursesComponent {
   });
 });
 
+  // Signal för att räkna ihop totalt antal kurser som visas i tabellen
+  totalCourseCount = computed(() => { 
+    return this. filteredAndSortedCourses().length 
+  });
+
   // Metod för att hantera när en th klickas på (kod, namn, poäng eller ämne)
   setSort(field: keyof Course) {
     if (this.sortField() === field) {

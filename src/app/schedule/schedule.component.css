@@ -1,8 +1,7 @@
-p {
-  margin-bottom: 0.5rem;
+#totalPoints {
+  text-align: center;
 }
 
-/* Grid-layout för alla kurs-boxar */
 .schedule-grid {
   display: grid;
   gap: 1rem;
@@ -22,7 +21,6 @@ p {
   }
 }
 
-/* Kurs-boxen */
 .course-box {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -73,7 +71,6 @@ p {
   cursor: not-allowed;
 }
 
-/* Rensa-knapp */
 .clear-button {
   display: block;
   margin: 1rem auto;
